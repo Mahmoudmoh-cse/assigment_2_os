@@ -1,0 +1,113 @@
+Exercise 1: Using fork() in C
+This exercise demonstrates how a new process is created using the fork() system call.
+
+Code Explanation:
+When the program runs, the fork() system call is executed.
+fork() duplicates the current process and creates a new process called the child process.
+
+Return values of fork():
+• In the child process → fork() returns 0
+• In the parent process → fork() returns the PID of the child
+• If fork fails → returns a negative value
+
+What the program does:
+
+If pid == 0 → The code inside the child process runs, printing its PID.
+
+If pid > 0 → The parent process executes its own print statement, showing its PID.
+
+If pid < 0 → fork() failed and the program prints an error message.
+
+Purpose:
+This exercise shows how processes are created and how parent and child processes execute differently after fork().
+
+Exercise 2: Starting Processes in the Background
+This exercise shows how to start a process in the background using the & operator.
+
+Explanation:
+When you type:
+sleep 300 &
+This starts the sleep command but sends it to the background.
+You can continue using the terminal while the process keeps running.
+
+jobs
+This command lists all processes running in the background for the current terminal session.
+
+Purpose:
+It teaches how Linux allows multitasking by running processes in the background.
+
+Exercise 3: Stopping Processes
+This exercise explains how to stop a running process using tools such as ps and kill.
+
+Step 1:
+ps aux | grep sleep
+This command lists all running processes and filters the result to show only processes named "sleep".
+You use this to find the process ID (PID).
+
+Step 2:
+kill <PID>
+This sends a termination signal (SIGTERM) to the process to stop it.
+
+Step 3:
+ps aux | grep sleep
+Running this again confirms that the sleep process is no longer running.
+
+Purpose:
+You learn how to identify, manage, and stop processes using their PID.
+
+Exercise 4: Pausing and Resuming a Process
+This exercise demonstrates stopping and continuing a process without fully killing it.
+
+Commands:
+kill -STOP <PID>
+This pauses the process by sending SIGSTOP.
+
+kill -CONT <PID>
+This resumes the paused process by sending SIGCONT.
+
+Purpose:
+You understand how Linux signals work and how processes can be temporarily suspended and then resumed.
+
+Exercise 5: Role of the Linker
+This exercise teaches how multiple C files are compiled separately and then linked together.
+
+File 1: file1.c
+Contains a function called hello() that prints a message.
+
+File 2: file2.c
+Contains the main() function.
+It declares hello() so it can call it.
+
+Compilation:
+gcc file1.c file2.c -o output_program
+This command compiles both files and links them into one executable.
+
+Explanation of Linker:
+The linker combines the object code from file1.c and file2.c.
+It connects the call to hello() in file2.c with the actual function definition located in file1.c.
+Without the linker, the compiler wouldn't know where hello() is located.
+
+Purpose:
+To demonstrate that C programs can be split into multiple files and that the linker’s job is to connect them correctly.
+
+Exercise 6: Role of the Loader
+This exercise shows how the loader loads a program into memory and links it with shared libraries.
+
+Simple Program:
+A basic program that prints a message.
+
+Compilation:
+gcc simple_program.c -o simple_program
+
+ldd simple_program
+This command lists all dynamic libraries that the program depends on.
+
+Explanation of the Loader:
+When you run the program, the loader performs these tasks:
+• Loads the executable into memory
+• Loads required shared libraries like libc.so
+• Prepares stack, heap, and memory layout
+• Transfers control to the main() function
+
+Purpose:
+To understand how programs are prepared by the operating system before execution.
